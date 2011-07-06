@@ -180,19 +180,13 @@ int best = 0;
     
     if(isOver == true)
     {
-        for(int x = 0; x < size.width / 16; x++)
+        ccDrawLine(ccp(0, 0), ccp(0 - offset, [[gridArray objectAtIndex:0] intValue]));
+        ccDrawLine(ccp(0, size.height), ccp(0 - offset, size.height - [[gridArray objectAtIndex:0] intValue]));
+        
+        for(int x = 1; x <= size.width / 16; x++)
         {
-            if(x <= 13)
-            {
-                ccDrawLine(ccp(x*16 - offset + 1, 0), ccp(x*16 - offset + 1, [[gridArray objectAtIndex:x] intValue]));
-                ccDrawLine(ccp(x*16 - offset + 1, size.height), ccp(x*16 - offset + 1, size.height - [[gridArray objectAtIndex:x] intValue]));
-            }
-            
-            else
-            {
-                ccDrawLine(ccp(x*16 - offset, 0), ccp(x*16 - offset, [[gridArray objectAtIndex:x] intValue]));
-                ccDrawLine(ccp(x*16 - offset, size.height), ccp(x*16 - offset, size.height - [[gridArray objectAtIndex:x] intValue]));
-            }
+            ccDrawLine(ccp(x*16 - offset, 0), ccp(x*16 - offset, [[gridArray objectAtIndex:x] intValue]));
+            ccDrawLine(ccp(x*16 - offset, size.height), ccp(x*16 - offset, size.height - [[gridArray objectAtIndex:x] intValue]));
         }
         
         glColor4ub(255, 0, 0, 255);
@@ -203,7 +197,10 @@ int best = 0;
     
     else if(isStarted == true)
     {
-        for(int x = 0; x < size.width / 16; x++)
+        ccDrawLine(ccp(0, 0), ccp(0, [[gridArray objectAtIndex:0] intValue]));
+        ccDrawLine(ccp(0, size.height), ccp(0, size.height - [[gridArray objectAtIndex:0] intValue]));
+        
+        for(int x = 1; x <= size.width / 16; x++)
         {
             ccDrawLine(ccp(x*16 - offset, 0), ccp(x*16 - offset, [[gridArray objectAtIndex:x] intValue]));
             ccDrawLine(ccp(x*16 - offset, size.height), ccp(x*16 - offset, size.height - [[gridArray objectAtIndex:x] intValue]));
@@ -215,7 +212,7 @@ int best = 0;
 {        
     [gridArray addObject:[NSNumber numberWithInt:5]];
         
-    for(int x = 1; x < size.width / 16; x++)
+    for(int x = 1; x <= size.width / 16; x++)
     {
         [self addToArray];
         
