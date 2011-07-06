@@ -27,7 +27,7 @@ CCLabelTTF *lblScore;
 CCLabelTTF *lblGameOver;
 CCLabelTTF *lblBest;
 
-float offset = 0;
+int offset = 0;
 
 int score = 0;
 int best = 0;
@@ -37,6 +37,9 @@ int best = 0;
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
+    
+    //hide the FPS label
+    [[CCDirector sharedDirector] setDisplayFPS:NO];
 	
 	// 'layer' is an autorelease object.
 	HelicopterLayer *layer = [HelicopterLayer node];
@@ -126,7 +129,7 @@ int best = 0;
     else if(isStarted == true)
     {
         //offset += dt * 75;
-        offset += dt * 95;
+        offset += floor(dt * 95);
         score++;
         
         if(score > best)
@@ -179,8 +182,17 @@ int best = 0;
     {
         for(int x = 0; x < size.width / 16; x++)
         {
-            ccDrawLine(ccp(x*16 - offset, 0), ccp(x*16 - offset, [[gridArray objectAtIndex:x] intValue]));
-            ccDrawLine(ccp(x*16 - offset, size.height), ccp(x*16 - offset, size.height - [[gridArray objectAtIndex:x] intValue]));
+            if(x <= 13)
+            {
+                ccDrawLine(ccp(x*16 - offset + 1, 0), ccp(x*16 - offset + 1, [[gridArray objectAtIndex:x] intValue]));
+                ccDrawLine(ccp(x*16 - offset + 1, size.height), ccp(x*16 - offset + 1, size.height - [[gridArray objectAtIndex:x] intValue]));
+            }
+            
+            else
+            {
+                ccDrawLine(ccp(x*16 - offset, 0), ccp(x*16 - offset, [[gridArray objectAtIndex:x] intValue]));
+                ccDrawLine(ccp(x*16 - offset, size.height), ccp(x*16 - offset, size.height - [[gridArray objectAtIndex:x] intValue]));
+            }
         }
         
         glColor4ub(255, 0, 0, 255);

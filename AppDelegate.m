@@ -68,6 +68,11 @@
 	
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
+    
+    
+
+
+    
 	
 //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 //	if( ! [director enableRetinaDisplay:YES] )
